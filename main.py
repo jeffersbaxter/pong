@@ -3,6 +3,7 @@ from turtle import Screen
 
 from ball import Ball
 from paddle import Paddle
+from scoreboard import Scoreboard
 
 screen = Screen()
 screen.bgcolor("black")
@@ -13,9 +14,7 @@ screen.tracer(0)
 l_paddle = Paddle((-350, 0))
 r_paddle = Paddle((350, 0))
 ball = Ball()
-
-left_score = 0
-right_score = 0
+scoreboard = Scoreboard()
 
 screen.listen()
 screen.onkey(r_paddle.go_up, "Up")
@@ -40,12 +39,10 @@ while game_is_on:
     # Detect Ball goes out of bounds
     if ball.xcor() > 380:
         ball.reset_position()
-        left_score += 1
-        print(f"Left: {left_score} Right {right_score}")
+        scoreboard.l_point()
 
     if ball.xcor() < -380:
         ball.reset_position()
-        right_score += 1
-        print(f"Left: {left_score} Right {right_score}")
+        scoreboard.r_point()
 
 screen.exitonclick()
